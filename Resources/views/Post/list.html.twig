@@ -2,11 +2,11 @@
 
 {%- block body -%}
 
-    <h2>Posts</h2>
+    <h1>Posts</h1>
     <ul>
         {% for post in posts %}
             <li>
-                <h3><a href="{{ path('mayeco_post_single', {'id': post.id}) }}">{{ post.titulo }}</a></h3>
+                <h2><a href="{{ path('mayeco_post_single', {'id': post.id}) }}">{{ post.titulo }}</a></h2>
                 <p>{{ post.texto }}</p>
             </li>
         {% endfor %}

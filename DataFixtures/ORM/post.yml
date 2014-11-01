@@ -1,4 +1,13 @@
 Mayeco\PostBundle\Entity\Post:
-    post{1..20}:
+    post_{1..20}:
         titulo: <sentence()>
         texto: <text()>
+        publicado: <dateTime()>
+        posttype: post
+
+    coments_{50..100}:
+        titulo: <sentence()>
+        texto: <text()>
+        publicado: <dateTime()>
+        posttype: comment
+        parent: @post_*
