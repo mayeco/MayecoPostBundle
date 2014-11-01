@@ -35,9 +35,12 @@ class PostRepository extends EntityRepository
     {
         $q = $this->createQueryBuilder('post')
             ->select('post')
+            ->leftJoin('post.children', 'children')
             ->where('post.posttype = :posttype')
+            ->andWhere('children.posttype = :commenttype')
             ->andWhere('post.id = :id')
             ->setParameter('posttype', 'post')
+            ->setParameter('commenttype', 'comment')
             ->setParameter('id', $id)
             ->getQuery()
         ;

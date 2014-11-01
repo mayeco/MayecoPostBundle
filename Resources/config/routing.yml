@@ -1,8 +1,8 @@
 
 mayeco_post_list:
     path:     /
-    defaults: { _controller: MayecoPostBundle:Default:list }
+    defaults: { _controller: MayecoPostBundle:Post:list }
 
 mayeco_post_single:
     path:     /{id}
-    defaults: { _controller: MayecoPostBundle:Default:single }
+    defaults: { _controller: MayecoPostBundle:Post:single }
