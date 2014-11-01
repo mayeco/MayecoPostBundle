@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{%- block title -%}{% endblock %} - NewPower.cl</title>
+    {%- block stylesheets -%}
+        <link rel="stylesheet" href="http://yui.yahooapis.com/3.14.1/build/cssreset/cssreset-min.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+        {%- block headcss -%}{%- endblock -%}
+        <style>
+            html, body{
+                padding:50px;
+            }
+        </style>
+
+    {%- endblock -%}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+
+{%- block body -%}{%- endblock -%}
+
+{% block footer %}
+
+{% endblock %}
+
+{%- block javascripts -%}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+{%- endblock -%}
+
+{%- block footerjs -%}{%- endblock -%}
+</body>
+</html>
