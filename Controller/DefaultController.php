@@ -11,7 +11,7 @@ class DefaultController extends \Mayeco\BaseBundle\Controller\Controller
         $repository = $this->getRepository('MayecoPostBundle:Post');
         $posts = $repository->findAll();
 
-        return $this->render('MayecoPostBundle:Default:list.html.twig', array('posts' => $posts));
+        return $this->render('MayecoPostBundle:Post:list.html.twig', array('posts' => $posts));
     }
 
     public function singleAction($id)
@@ -19,7 +19,7 @@ class DefaultController extends \Mayeco\BaseBundle\Controller\Controller
         $repository = $this->getRepository('MayecoPostBundle:Post');
         $post = $repository->findOneBy(array("id" => $id));
 
-        return $this->render('MayecoPostBundle:Default:single.html.twig', array('post' => $post));
+        return $this->render('MayecoPostBundle:Post:single.html.twig', array('post' => $post));
     }
 
 }
