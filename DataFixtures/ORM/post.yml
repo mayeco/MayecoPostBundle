@@ -1,0 +1,4 @@
+Mayeco\PostBundle\Entity\Post:
+    post{1..20}:
+        titulo: <sentence()>
+        texto: <text()>

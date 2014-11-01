@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{%- block body -%}
+
+    <h2>Posts</h2>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h3><a href="{{ path('mayeco_post_single', {'id': post.id}) }}">{{ post.titulo }}</a></h3>
+                <p>{{ post.texto }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+{%- endblock -%}
