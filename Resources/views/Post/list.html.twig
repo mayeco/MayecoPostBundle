@@ -12,4 +12,12 @@
         {% endfor %}
     </ul>
 
+    <div class="pagerfanta">
+        {{ pagerfanta(posts, 'twitter_bootstrap3') }}
+    </div>
+
 {%- endblock -%}
+
+{%- block title -%}
+    Tenemos {{ posts.nbResults }} post! - pagina {{ posts.getCurrentPage }}
+{%- endblock title -%}

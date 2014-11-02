@@ -2,21 +2,21 @@
 
 namespace Mayeco\PostBundle\Controller;
 
-
 /**
- * Class DefaultController
+ * Class PostController
  * @package Mayeco\PostBundle\Controller
  */
 class PostController extends \Mayeco\BaseBundle\Controller\Controller
 {
 
     /**
+     * @param $pagina
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction()
+    public function listAction($page)
     {
         $repository = $this->getRepository('MayecoPostBundle:Post');
-        $posts = $repository->findAllPost();
+        $posts = $this->getPaginator($repository->queryAllPost(), $page, 10);
 
         $this->addData($posts, "posts");
         $this->setTemplate("MayecoPostBundle::Post/list.html.twig");
