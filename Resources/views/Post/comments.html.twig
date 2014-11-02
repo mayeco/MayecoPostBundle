@@ -1,0 +1,17 @@
+<div class="bg-info" style="margin-top:20px; padding:20px;">
+
+    <ul>
+        {% for comment in comments %}
+            <li id="{{ comment.id }}">
+                <p>
+                    <a href="{{ path('mayeco_post_single', {'id': id}) }}#{{ comment.id }}">#</a> {{ comment.texto }}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(comments, 'twitter_bootstrap3') }}
+    </div>
+
+</div>

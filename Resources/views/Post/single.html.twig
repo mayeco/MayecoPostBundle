@@ -5,12 +5,8 @@
     <h1>{{ post.titulo }}</h1>
     <p>{{ post.texto }}</p>
 
-    <ul class="bg-info" style="margin-top:20px; padding:20px;">
-        {% for comment in post.children %}
-            <li id="{{ comment.id }}">
-                <p><a href="{{ path('mayeco_post_single', {'id': post.id}) }}#{{ comment.id }}">#</a> {{ comment.texto }}</p>
-            </li>
-        {% endfor %}
-    </ul>
+    {% include "MayecoPostBundle:Post:comments.html.twig" with { comments: comments, id: post.id } %}
+
+    <h4><a href="{{ path('mayeco_post_list') }}">Regresar</a></h4>
 
 {%- endblock -%}

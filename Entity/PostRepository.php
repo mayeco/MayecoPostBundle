@@ -35,12 +35,23 @@ class PostRepository extends EntityRepository
     {
         $q = $this->createQueryBuilder('post')
             ->select('post')
-            ->leftJoin('post.children', 'children')
             ->where('post.posttype = :posttype')
-            ->andWhere('children.posttype = :commenttype')
             ->andWhere('post.id = :id')
             ->setParameter('posttype', 'post')
-            ->setParameter('commenttype', 'comment')
+            ->setParameter('id', $id)
+            ->getQuery()
+        ;
+
+        return $q;
+    }
+
+    public function queryComments($id)
+    {
+        $q = $this->createQueryBuilder('post')
+            ->select('post')
+            ->where('post.posttype = :posttype')
+            ->andWhere('post.parent = :id')
+            ->setParameter('posttype', 'comment')
             ->setParameter('id', $id)
             ->getQuery()
         ;

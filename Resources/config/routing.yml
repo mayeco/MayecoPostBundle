@@ -1,7 +1,7 @@
 
 mayeco_post_list:
-    path:     /{page}
-    defaults: { _controller: MayecoPostBundle:Post:list, page: 1 }
+    path:     /
+    defaults: { _controller: MayecoPostBundle:Post:list }
 
 mayeco_post_single:
     path:     /ver-post/{id}
