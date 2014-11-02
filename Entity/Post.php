@@ -63,6 +63,7 @@ class Post
      *  @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     private $parent;
+
     /**
      * Constructor
      */
