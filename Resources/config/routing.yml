@@ -2,7 +2,12 @@
 mayeco_post_list:
     path:     /
     defaults: { _controller: MayecoPostBundle:Post:list }
+    methods:  [GET]
 
 mayeco_post_single:
-    path:     /ver-post/{id}
-    defaults: { _controller: MayecoPostBundle:Post:single }
+    path:     /ver-post/{id}.{_format}
+    defaults: { _controller: MayecoPostBundle:Post:single, _format: html }
+    methods:  [GET]
+    requirements:
+        id: \d+
+        _format: html|json

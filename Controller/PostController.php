@@ -4,6 +4,8 @@ namespace Mayeco\PostBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+
 /**
  * Class PostController
  * @package Mayeco\PostBundle\Controller
@@ -12,44 +14,36 @@ class PostController extends \Mayeco\BaseBundle\Controller\Controller
 {
 
     /**
-     * @param $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @QueryParam(name="page", requirements="\d+", default="1", description="")
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, $page)
     {
-        $page = $request->query->get('page');
-        if(!$page)
-            $page = 1;
-
         $repository = $this->getRepository('MayecoPostBundle:Post');
         $posts = $this->getPaginator($repository->queryAllPost(), $page);
 
         $this->addData($posts, "posts");
-        $this->addData($page, "page");
         $this->setTemplate("MayecoPostBundle::Post/list.html.twig");
 
         return $this->view();
     }
 
     /**
-     * @param $request
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @QueryParam(name="page", requirements="\d+", default="1", description="")
      */
-    public function singleAction(Request $request, $id)
+    public function singleAction(Request $request, $id, $_format, $page)
     {
-        $page = $request->query->get('page');
-        if(!$page)
-            $page = 1;
-
-        $this->addData($page, "page");
         $repository = $this->getRepository('MayecoPostBundle:Post');
         $post = $repository->findPost($id);
         $comments = $this->getPaginator($repository->queryComments($id), $page, 2);
 
-        $this->addData($comments, "comments");
         $this->addData($post, "post");
-        $this->setTemplate("MayecoPostBundle::Post/single.html.twig");
+
+        if("html" == $_format) {
+
+            $this->addData($comments, "comments");
+            $this->setTemplate("MayecoPostBundle::Post/single.html.twig");
+
+        }
 
         return $this->view();
     }
