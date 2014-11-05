@@ -2,9 +2,14 @@
 
 namespace Mayeco\PostBundle\Controller;
 
+use Mayeco\PostBundle\Entity\Post;
+
 use Symfony\Component\HttpFoundation\Request;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use Mmoreram\ControllerExtraBundle\Annotation\Entity;
+
 
 /**
  * Class PostController
@@ -16,7 +21,7 @@ class PostController extends \Mayeco\BaseBundle\Controller\Controller
     /**
      * @QueryParam(name="page", requirements="\d+", default="1", description="")
      */
-    public function listAction(Request $request, $page)
+    public function listAction($page)
     {
         $repository = $this->getRepository('MayecoPostBundle:Post');
         $posts = $this->getPaginator($repository->queryAllPost(), $page);
@@ -29,12 +34,12 @@ class PostController extends \Mayeco\BaseBundle\Controller\Controller
 
     /**
      * @QueryParam(name="page", requirements="\d+", default="1", description="")
+     * @ParamConverter("post", class="MayecoPostBundle:Post")
      */
-    public function singleAction(Request $request, $id, $_format, $page)
+    public function singleAction(Post $post, $_format, $page)
     {
         $repository = $this->getRepository('MayecoPostBundle:Post');
-        $post = $repository->findPost($id);
-        $comments = $this->getPaginator($repository->queryComments($id), $page, 2);
+        $comments = $this->getPaginator($repository->queryComments($post->getId()), $page, 2);
 
         $this->addData($post, "post");
 
