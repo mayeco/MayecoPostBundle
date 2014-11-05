@@ -4,11 +4,11 @@ namespace Mayeco\PostBundle\Controller;
 
 use Mayeco\PostBundle\Entity\Post;
 
+use Doctrine\ORM\Query;
 use Symfony\Component\HttpFoundation\Request;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-use Mmoreram\ControllerExtraBundle\Annotation\Entity;
+
 
 
 /**
@@ -35,20 +35,16 @@ class PostController extends \Mayeco\BaseBundle\Controller\Controller
     /**
      * @QueryParam(name="page", requirements="\d+", default="1", description="")
      * @ParamConverter("post", class="MayecoPostBundle:Post")
+     * @ParamConverter("commentsquery", class="MayecoPostBundle:Post", options={"repository_method" = "queryComments"})
+     *
      */
-    public function singleAction(Post $post, $_format, $page)
+    public function singleAction(Post $post, Query $commentsquery, $page)
     {
-        $repository = $this->getRepository('MayecoPostBundle:Post');
-        $comments = $this->getPaginator($repository->queryComments($post->getId()), $page, 2);
+        $comments = $this->getPaginator($commentsquery, $page, 2);
 
         $this->addData($post, "post");
-
-        if("html" == $_format) {
-
-            $this->addData($comments, "comments");
-            $this->setTemplate("MayecoPostBundle::Post/single.html.twig");
-
-        }
+        $this->addData($comments, "comments");
+        $this->setTemplate("MayecoPostBundle::Post/single.html.twig");
 
         return $this->view();
     }
