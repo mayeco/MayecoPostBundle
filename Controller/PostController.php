@@ -4,8 +4,9 @@ namespace Mayeco\PostBundle\Controller;
 
 use Mayeco\PostBundle\Entity\Post;
 
-use Doctrine\ORM\Query;
 use Symfony\Component\HttpFoundation\Request;
+
+use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 
